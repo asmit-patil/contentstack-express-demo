@@ -1,0 +1,13 @@
+{% extends "layouts/default.html" %}
+{% block content %} 
+  
+<h1 style="margin:40px">{{title}}</h1>
+<ul  style=" margin:40px">
+
+{% for blog in entry | shorten %}
+  <a href="{{ blog.blog_name.href }}"><li>{{ blog.blog_name.title }}</li></a>
+{% else %}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
+</ul>
+{% endblock %}
