@@ -2,23 +2,6 @@
 {# e.g. set header = get("header_content_type_id") #}
 {# And then render header values using the {{header.field_name}} #}
 {% set header = get("header") %}
-   
-        {# <div class="header-container">
-            <a href="{{header.navbar[0].href}}"> <img class="logo" src="{{header.logo.url}}" width="100px" /></a>
-            <div class="nav">  
-                <ul>
-                    <li><a href="{{header.navbar[0].href}}">{{header.navbar[0].title}}</a></li>
-                    <li><a href="{{header.navbar[1].href}}">{{header.navbar[1].title}}</a></li>
-                    <li><a href="{{header.navbar[2].href}}">{{header.navbar[2].title}}<i class="fa fa-caret-down"></i></a> 
-                        <ul>
-                            <li><a href="#">link 1</a></li>
-                            <li><a href="#">link 2</a></li>
-                         </ul>
-                    </li>
-                    <li><a href="{{header.navbar[3].href}}">{{header.navbar[3].title}}</a></li>       
-                </ul>
-            </div>
-        </div> #}
         <div class="header-container">
             <a href="{{header.navbar[0].href}}"> <img class="logo" src="{{header.logo.url}}" width="100px" /></a>
             <div class="nav">  
