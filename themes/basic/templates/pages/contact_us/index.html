@@ -1,0 +1,47 @@
+{% extends "layouts/default.html" %}
+{# display page values using the {{entry.field_id}} tag. #}
+{% block content %}
+<section>
+<div class="container">
+        <h2>{{entry.contact_us_title}}</h2>
+        <h4>{{entry.contact_us_description}}</h4>
+        <p id="p1"></p>
+        <div class="full-form-container">
+    
+            <form name="feedbaackform"  method="post" onsubmit="return validateForm()" action="feedback-confirmation.html">
+                <div class="querry-form">
+                    
+                    <div class="self">
+                        <h3>{{entry.self_info.title}}</h3>
+                       
+                        <div class="form1">
+                            <input class="name1" id="fname" type="text" placeholder="{{entry.self_info.form_fields[0].placeholder}}"  >
+                            <input class="name1" id="lname" type="text" placeholder="{{entry.self_info.form_fields[1].placeholder}}" >
+                            <input class="name1" id="mail" type="email" placeholder="{{entry.self_info.form_fields[2].placeholder}}" >
+                        </div>
+                    </div>
+                    <div class="business">
+                        <h3>{{entry.business_info.title}}</h3>
+                        <input class="name1" id="cname" type="text" placeholder="{{entry.business_info.form_fields[0].placeholder}}" >
+                        <input class="name1" id="job" type="text" placeholder="{{entry.business_info.form_fields[1].placeholder}}" >
+                        <select id="business"><option value="---select a business type---">---Select a business type---</option>
+                            <option value="volvo">Volvo</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                        <select id="help">   
+                            <option value="---select type of help---"> ---Select type of help---</option>
+                            <option value="saab">Saab</option>
+                            <option value="opel">Opel</option>
+                            <option value="audi">Audi</option>
+                        </select>
+                    </div>
+                </div>
+                <textarea rows="5"  placeholder="{{entry.feedback}}"></textarea> 
+                <div class="submit" ><button class="sub"  type="submit" value="Submit" onclick="focusMethod()" >{{entry.button_name}}</button></div>
+            </form>
+        </div>
+    </div>
+</section>
+{% endblock %}

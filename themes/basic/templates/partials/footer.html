@@ -1,0 +1,39 @@
+{# If you have a "Content Type" for footer in Built.io Contentstack then use get() view helper to retrieve footer entry. #}
+{# e.g. set footer = get("footer_content_type_id") #}
+{# And then render footer values using the {{footer.field_name}} #}
+{% set footer = get("footer") %}
+<div class="footer">
+    <div class="main-footer container">
+        <div class="footer-logo space">
+            <a href="{{footer.vertical_navbar[0].href}}"> <img src="{{footer.logo.url}}"/></a>
+        </div> 
+       <div class="space">
+            <div class="sidenav">
+            {% for entry in footer.vertical_navbar %}
+                <a href="{{entry.href}}">{{entry.title}}</a>
+            {% else %}
+                    <li>This would display if the 'item' collection were empty</li>
+            {% endfor %}
+            
+            </div>
+        </div>
+        <div class="links space">
+            <h2>{{footer.connect_title}}</h2>
+            <a href="{{footer.connect[0].href}}"><i href="#" class="fa fa-google"></i>{{footer.connect[0].title}}</a>
+            <a href="{{footer.connect[1].href}}"><i href="#" class="fa fa-facebook"></i>{{footer.connect[1].title}}</a>
+            <a href="{{footer.connect[2].href}}"><i href="#" class="fa fa-twitter"></i>{{footer.connect[2].title}}</a>
+            <a href="{{footer.connect[3].href}}"><i href="#" class="fa fa-youtube"></i>{{footer.connect[3].title}}</a>
+        </div>
+    </div>
+</div>
+<div class="sticky-footer">
+    <div class="copy">{{footer.copyright}}</div>
+        <div class="social">
+            <a href="{{footer.connect[1].href}}" class="fa fa-facebook"></a>
+            <a href="{{footer.connect[2].href}}" class="fa fa-twitter"></a>
+            <a href="{{footer.connect[0].href}}" class="fa fa-google"></a>
+            <a href="{{footer.connect[3].href}}" class="fa fa-youtube"></a>
+        </div>      
+    </div>
+</div>
+   

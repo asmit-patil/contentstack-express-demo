@@ -1,0 +1,10 @@
+{
+    "name": "cms-demo",
+    "version": "0.0.1",
+    "dependencies": {
+        "contentstack-express": "^3.0.0"
+    },
+    "scripts": {
+        "start": "NODE_ENV=preview_sync node app.js"
+    }
+}
