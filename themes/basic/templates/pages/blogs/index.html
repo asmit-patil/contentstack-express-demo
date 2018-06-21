@@ -1,13 +1,11 @@
 {% extends "layouts/default.html" %}
 {% block content %} 
-  
-<h1 style="margin:40px">{{title}}</h1>
-<ul  style=" margin:40px">
 
-{% for blog in entry | shorten %}
-  <a href="{{ blog.blog_name.href }}"><li>{{ blog.blog_name.title }}</li></a>
-{% else %}
-  <li>This would display if the 'item' collection were empty</li>
-{% endfor %}
-</ul>
+<div style="padding: 60px; margin-top: 30px"> 
+<a href="/blogs">Go Back</a>
+<h1>{{ entry.blog_name.title }} </h1>
+<img src="{{entry.image.url}}"></img>
+<p>{{ entry.description }}</p>
+<h4>{{ entry.author }}</h4>
+</div>
 {% endblock %}

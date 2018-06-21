@@ -2,22 +2,21 @@
  * blogplugin
  */
 
- "use strict";
+ "use strict"
 
 /*!
  * Module dependencies
  */
-var contentstack =  require('contentstack-express');
+var contentstack =  require('contentstack-express')
 var config = contentstack.config
 const stack = contentstack.Stack(config.get('apikey'), config.get('accesstoken'), config.get('environment'))
-//var environment = config.get("environment")
 module.exports = function Blogplugin() {
 
    /*
     * Blogplugin.options provides the options provided in the configuration.
     */
 
-   var options = Blogplugin.options;
+   var options = Blogplugin.options
 
    /*
     * @templateExtends
@@ -27,18 +26,17 @@ module.exports = function Blogplugin() {
            Blogplugin.templateExtends = function(engine) {
                // engine loader, setting filters etc.
                engine.getEnvironment().addFilter("shorten", function(str, count) {
-                   return str.slice(0, count || 5);
-               });
-           };
+                   return str.slice(0, count || 5)
+               })
+           }
     * @Usage: template file
            A message for you: {{ message | shorten }}
     */
-   Blogplugin.templateExtends = function(engine) {
-    
-    engine.getEnvironment().addFilter("shorten", function(str, count) {
-        return str.slice(0, count || 10);
-      });
-   };
+    Blogplugin.templateExtends = function(engine) {
+        engine.getEnvironment().addFilter("shorten", function(str, count) {
+        return str.slice(0, count || 10)
+      })
+    }
 
    /*
     * @serverExtends
@@ -49,40 +47,62 @@ module.exports = function Blogplugin() {
                app
                    .use(function(req, res, next){
                        // your code goes here
-                       next();
-                   });
+                       next()
+                   })
  
                app
                    .extends()
                    .get('/test', function(req, res, next){
                        // your code goes here
-                       next();
-                   });
-           };
+                       next()
+                   })
+           }
     */
     Blogplugin.serverExtends = function(app) {
-    app
-    .extends()
-    .get('/blogs', function(req, res, next){
+        app
+        .extends()
+        .get('/blogs', function(req, res, next){
+            
+            var perPage = 4
+            var page = req.params.page || 1
     // your code goes here
-    var query = stack.ContentType('blogs').Query().toJSON().find();
-    query.spread(
+    stack.ContentType('blogs').Query()
+        .skip((perPage * page) - perPage)
+        .limit(perPage)
+        .toJSON()
+        .find()
+        .spread(
         function(data) {
             
-            //req.getViewContext().set(`blogs`, entry);
-            res.render('pages/blogs/index',{
+            //req.getViewContext().set(`blogs`, entry)
+            res.render('pages/bloglist/index',{
                 title: 'List of Blogs',
-                entry : data
+                entry : data,
+                current: page,
+                pages: Math.ceil(12 / perPage)
+                
             })
             
-        //next();
+        //next()
         }, function(error) {
             req.getViewContext().set("data", {});
-            next();
+            next()
         }
-    );
-    });
-    };
+    )
+    })
+    .get('/blogs/:title', function(req, res, next){
+        // your code goes here
+        stack.ContentType('blogs').Query()
+        .where('title', req.params.title)
+        .toJSON()
+        .find()
+        .spread(function success(result) {
+            res.render('pages/blogs/index', { entry: result[0] })
+        })
+        })
+    }
+    
+
   
    /*
     * @beforePublish
@@ -95,14 +115,14 @@ module.exports = function Blogplugin() {
            Blogplugin.beforePublish = function(data, next) {
                *
                * var entry = data.entry;
-               * var contentType = data.contentType;
-               * var language = data.language;
+               * var contentType = data.contentType
+               * var language = data.language
                *
-           };
+           }
     */
    Blogplugin.beforePublish = function (data, next) {
-       next();
-   };
+       next()
+   }
   
    /*
     * @beforeUnpublish
@@ -114,15 +134,15 @@ module.exports = function Blogplugin() {
     * @Example:
            Blogplugin.beforeUnpublish = function(data, next) {
                *
-               * var entry = data.entry;
-               * var contentType = data.contentType;
-               * var language = data.language;
+               * var entry = data.entry
+               * var contentType = data.contentType
+               * var language = data.language
                *
-           };
+           }
     */
    Blogplugin.beforeUnpublish = function (data, next) {
-       next();
-   };
-};
+       next()
+   }
+}
 
 

@@ -1,0 +1,57 @@
+{% extends "layouts/default.html" %}
+<script>
+<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+</script>
+{% block content %} 
+  
+<h1 style="margin:40px">{{title}}</h1>
+<ul  style=" margin:40px">
+
+{% for blog in entry  %}
+  <a href="{{ blog.blog_name.href }}"><li>{{ blog.blog_name.title }}</li></a>
+{% else %}
+  <li>This would display if the 'item' collection were empty</li>
+{% endfor %}
+</ul>
+
+
+{# 
+  {% if (pages > 0)  %}
+                <ul class="pagination text-center">
+                    {% if (current == 1)  %}
+                        <li class="disabled"><a>First</a></li>
+                    {%  else  %}
+                        <li><a href="/blogs/1">First</a></li>
+                    {% endif %}
+
+
+                    {% set i = (Number(current) > 5 ? Number(current) - 4 : 1) %}
+                    
+		                {% if (i !== 1)  %}
+                        <li class="disabled"><a>...</a></li>
+                    {% endif %}
+
+                    {% for (; i <= (Number(current) + 4) && i <= pages; i++)  %}
+                        {% if (i == current)  %}
+                            <li class="active"><a>{{ i }}</a></li>
+                        {%  else  %}
+                            <li><a href="/blogs/{{ i }}">{{ i }}</a></li>
+                        {% endif %}
+
+                        {% if (i == Number(current) + 4 && i < pages)  %}
+                            <li class="disabled"><a>...</a></li>
+                        {% endif %}
+                    {% endfor %}
+
+
+                    {% if (current == pages)  %}
+                        <li class="disabled"><a>Last</a></li>
+                    {%  else  %}
+                        <li><a href="/blogs/{{ pages }}">Last</a></li>
+                    {% endif %}
+
+                </ul>
+           
+ {% endif %}  #}
+
+{% endblock %}

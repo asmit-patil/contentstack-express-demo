@@ -31,14 +31,7 @@
             </a>
         </div>
     </div> 
-    <ul  style="padding: 60px; margin-top: 60px">
-
-{% for blog in blogs %}
-  <li><a href="{{ blog.blog_name.href }}">{{ blog.blog_name.title }}</a></li>
-{% else %}
-  <li>This would display if the 'item' collection were empty</li>
-{% endfor %}
-</ul>               
+                
     <div class="main-gallery container"> 
         <h3>{{entry.testimonial}}</h3>
         <div class="flexgallery">

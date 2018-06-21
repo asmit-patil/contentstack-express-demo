@@ -8,10 +8,13 @@
                    <ul>
                     {% for entry in header.navbar %}
                         <li><a href="{{ entry.href }}">{{ entry.title }}</a></li>
+                        
                     {% else %}
                         <li>This would display if the 'item' collection were empty</li>
                     {% endfor %}
+                    <li><a href="/blogs/1">blogs</a></li>
                    </ul>
+                   
             </div>
         </div>
         
